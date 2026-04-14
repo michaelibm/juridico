@@ -1,0 +1,35 @@
+# Dependências
+node_modules/
+.pnp
+.pnp.js
+
+# Variáveis de ambiente (NUNCA commitar)
+.env
+.env.local
+.env.*.local
+
+# Build
+dist/
+build/
+
+# Prisma - não commitar o client gerado
+backend/node_modules/
+frontend/node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Docker volumes
+postgres_data/
+
+# Editor
+.vscode/
+.idea/
+
+# Claude
+.claude/

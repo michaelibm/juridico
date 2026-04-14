@@ -1,0 +1,65 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: juridico_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-juridico}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-juridico123}
+      POSTGRES_DB: ${DB_NAME:-juridico_db}
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - juridico_net
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER:-juridico}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: juridico_backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgresql://${DB_USER:-juridico}:${DB_PASSWORD:-juridico123}@postgres:5432/${DB_NAME:-juridico_db}
+    ports:
+      - '3001:3001'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - juridico_net
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: juridico_frontend
+    restart: unless-stopped
+    env_file:
+      - ./frontend/.env
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend
+    networks:
+      - juridico_net
+
+volumes:
+  postgres_data:
+
+networks:
+  juridico_net:
+    driver: bridge

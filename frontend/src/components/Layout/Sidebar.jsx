@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, FolderOpen, FilePlus, Users,
-  ClipboardList, Scale, ChevronRight,
+  ClipboardList, ChevronRight,
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -63,24 +63,28 @@ const Sidebar = () => {
     }}>
       {/* Logo */}
       <div style={{
-        padding: '1.5rem 1.25rem',
+        padding: '1.25rem 1.25rem',
         borderBottom: '1px solid rgba(255,255,255,0.1)',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
-            width: 38, height: 38, borderRadius: '10px',
-            backgroundColor: '#c9a84c',
+            width: 44, height: 44, borderRadius: '10px',
+            backgroundColor: '#ffffff',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            flexShrink: 0,
+            flexShrink: 0, padding: '4px',
           }}>
-            <Scale size={20} color="#fff" />
+            <img
+              src="/logo.png"
+              alt="Logo"
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
           </div>
           <div>
             <div style={{ color: '#fff', fontWeight: 700, fontSize: '15px', lineHeight: 1.2 }}>
-              JurídICO
+              Controle de Processos
             </div>
             <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: '11px' }}>
-              Controle de Processos
+              Jurídico e Administrativo
             </div>
           </div>
         </div>

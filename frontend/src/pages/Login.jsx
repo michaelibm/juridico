@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Scale, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 const Login = () => {
@@ -44,18 +44,24 @@ const Login = () => {
         }}>
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <div style={{
-              width: 64, height: 64, borderRadius: '16px',
-              backgroundColor: '#c9a84c',
+              width: 80, height: 80, borderRadius: '20px',
+              backgroundColor: '#ffffff',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              margin: '0 auto 1rem',
+              margin: '0 auto 1.25rem',
+              padding: '8px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
             }}>
-              <Scale size={32} color="#fff" />
+              <img
+                src="/logo.png"
+                alt="Logo"
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+              />
             </div>
             <h1 style={{ color: '#fff', fontSize: '22px', fontWeight: 700, marginBottom: '4px' }}>
-              Sistema Jurídico
+              Controle de Processos
             </h1>
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '13px' }}>
-              Controle de Processos Jurídicos e Administrativos
+              Sistema Jurídico e Administrativo
             </p>
           </div>
 

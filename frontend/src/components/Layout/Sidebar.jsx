@@ -2,14 +2,15 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, FolderOpen, FilePlus, Users,
-  ClipboardList, ChevronRight,
+  ClipboardList, ChevronRight, DatabaseZap,
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
 const navItems = [
-  { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-  { path: '/processos', icon: FolderOpen, label: 'Processos' },
-  { path: '/processos/novo', icon: FilePlus, label: 'Novo Processo' },
+  { path: '/dashboard',      icon: LayoutDashboard, label: 'Dashboard' },
+  { path: '/processos',      icon: FolderOpen,      label: 'Processos' },
+  { path: '/processos/novo', icon: FilePlus,         label: 'Novo Processo' },
+  { path: '/consulta-datajud', icon: DatabaseZap,   label: 'Consulta Datajud' },
 ];
 
 const adminItems = [

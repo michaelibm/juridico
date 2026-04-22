@@ -11,6 +11,7 @@ import DetalhesProcesso from './pages/processos/DetalhesProcesso';
 import NovaMovimentacao from './pages/processos/NovaMovimentacao';
 import Usuarios from './pages/admin/Usuarios';
 import Logs from './pages/admin/Logs';
+import ConsultaDatajud from './pages/ConsultaDatajud';
 
 const RotaProtegida = ({ children, soAdmin = false }) => {
   const { usuario, carregando, isAdmin } = useAuth();
@@ -44,6 +45,10 @@ const AppRoutes = () => {
       } />
       <Route path="/processos/:id/movimentacao" element={
         <RotaProtegida><NovaMovimentacao /></RotaProtegida>
+      } />
+
+      <Route path="/consulta-datajud" element={
+        <RotaProtegida><ConsultaDatajud /></RotaProtegida>
       } />
 
       <Route path="/admin/usuarios" element={

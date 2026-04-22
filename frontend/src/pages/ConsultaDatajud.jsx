@@ -12,45 +12,126 @@ import Button from '../components/common/Button';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import datajudService from '../services/datajud.service';
 
-const TRIBUNAIS = [
-  { value: 'trf1',  label: 'TRF1 — 1ª Região' },
-  { value: 'trf2',  label: 'TRF2 — 2ª Região' },
-  { value: 'trf3',  label: 'TRF3 — 3ª Região' },
-  { value: 'trf4',  label: 'TRF4 — 4ª Região' },
-  { value: 'trf5',  label: 'TRF5 — 5ª Região' },
-  { value: 'trf6',  label: 'TRF6 — 6ª Região' },
-  { value: 'stj',   label: 'STJ — Superior Tribunal de Justiça' },
-  { value: 'stf',   label: 'STF — Supremo Tribunal Federal' },
-  { value: 'tst',   label: 'TST — Tribunal Superior do Trabalho' },
-  { value: 'tse',   label: 'TSE — Tribunal Superior Eleitoral' },
-  { value: 'tjsp',  label: 'TJSP — São Paulo' },
-  { value: 'tjrj',  label: 'TJRJ — Rio de Janeiro' },
-  { value: 'tjmg',  label: 'TJMG — Minas Gerais' },
-  { value: 'tjrs',  label: 'TJRS — Rio Grande do Sul' },
-  { value: 'tjpr',  label: 'TJPR — Paraná' },
-  { value: 'tjsc',  label: 'TJSC — Santa Catarina' },
-  { value: 'tjba',  label: 'TJBA — Bahia' },
-  { value: 'tjgo',  label: 'TJGO — Goiás' },
-  { value: 'tjpe',  label: 'TJPE — Pernambuco' },
-  { value: 'tjce',  label: 'TJCE — Ceará' },
-  { value: 'tjdf',  label: 'TJDF — Distrito Federal' },
-  { value: 'tjmt',  label: 'TJMT — Mato Grosso' },
-  { value: 'tjms',  label: 'TJMS — Mato Grosso do Sul' },
-  { value: 'tjam',  label: 'TJAM — Amazonas' },
-  { value: 'tjpa',  label: 'TJPA — Pará' },
-  { value: 'tjes',  label: 'TJES — Espírito Santo' },
-  { value: 'tjma',  label: 'TJMA — Maranhão' },
-  { value: 'tjal',  label: 'TJAL — Alagoas' },
-  { value: 'tjse',  label: 'TJSE — Sergipe' },
-  { value: 'tjpi',  label: 'TJPI — Piauí' },
-  { value: 'tjrn',  label: 'TJRN — Rio Grande do Norte' },
-  { value: 'tjpb',  label: 'TJPB — Paraíba' },
-  { value: 'tjro',  label: 'TJRO — Rondônia' },
-  { value: 'tjac',  label: 'TJAC — Acre' },
-  { value: 'tjap',  label: 'TJAP — Amapá' },
-  { value: 'tjrr',  label: 'TJRR — Roraima' },
-  { value: 'tjto',  label: 'TJTO — Tocantins' },
+const GRUPOS_TRIBUNAIS = [
+  {
+    grupo: 'Superiores',
+    itens: [
+      { value: 'stf',  label: 'STF — Supremo Tribunal Federal' },
+      { value: 'stj',  label: 'STJ — Superior Tribunal de Justiça' },
+      { value: 'tst',  label: 'TST — Tribunal Superior do Trabalho' },
+      { value: 'tse',  label: 'TSE — Tribunal Superior Eleitoral' },
+      { value: 'cjf',  label: 'CJF — Conselho da Justiça Federal' },
+      { value: 'csjt', label: 'CSJT — Conselho Superior da Justiça do Trabalho' },
+    ],
+  },
+  {
+    grupo: 'Justiça Federal (TRF)',
+    itens: [
+      { value: 'trf1', label: 'TRF1 — 1ª Região (AM, AP, BA, GO, MA, MG, MT, PA, PI, RO, RR, TO, DF, AC)' },
+      { value: 'trf2', label: 'TRF2 — 2ª Região (RJ, ES)' },
+      { value: 'trf3', label: 'TRF3 — 3ª Região (SP, MS)' },
+      { value: 'trf4', label: 'TRF4 — 4ª Região (RS, SC, PR)' },
+      { value: 'trf5', label: 'TRF5 — 5ª Região (AL, CE, PB, PE, RN, SE)' },
+      { value: 'trf6', label: 'TRF6 — 6ª Região (MG)' },
+    ],
+  },
+  {
+    grupo: 'Justiça do Trabalho (TRT)',
+    itens: [
+      { value: 'trt1',  label: 'TRT1  — Rio de Janeiro' },
+      { value: 'trt2',  label: 'TRT2  — São Paulo (Capital)' },
+      { value: 'trt3',  label: 'TRT3  — Minas Gerais' },
+      { value: 'trt4',  label: 'TRT4  — Rio Grande do Sul' },
+      { value: 'trt5',  label: 'TRT5  — Bahia' },
+      { value: 'trt6',  label: 'TRT6  — Pernambuco' },
+      { value: 'trt7',  label: 'TRT7  — Ceará' },
+      { value: 'trt8',  label: 'TRT8  — Pará e Amapá' },
+      { value: 'trt9',  label: 'TRT9  — Paraná' },
+      { value: 'trt10', label: 'TRT10 — Distrito Federal e Tocantins' },
+      { value: 'trt11', label: 'TRT11 — Amazonas e Roraima' },
+      { value: 'trt12', label: 'TRT12 — Santa Catarina' },
+      { value: 'trt13', label: 'TRT13 — Paraíba' },
+      { value: 'trt14', label: 'TRT14 — Rondônia e Acre' },
+      { value: 'trt15', label: 'TRT15 — São Paulo (Campinas)' },
+      { value: 'trt16', label: 'TRT16 — Maranhão' },
+      { value: 'trt17', label: 'TRT17 — Espírito Santo' },
+      { value: 'trt18', label: 'TRT18 — Goiás' },
+      { value: 'trt19', label: 'TRT19 — Alagoas' },
+      { value: 'trt20', label: 'TRT20 — Sergipe' },
+      { value: 'trt21', label: 'TRT21 — Rio Grande do Norte' },
+      { value: 'trt22', label: 'TRT22 — Piauí' },
+      { value: 'trt23', label: 'TRT23 — Mato Grosso' },
+      { value: 'trt24', label: 'TRT24 — Mato Grosso do Sul' },
+    ],
+  },
+  {
+    grupo: 'Justiça Eleitoral (TRE)',
+    itens: [
+      { value: 'tre-ac', label: 'TRE-AC — Acre' },
+      { value: 'tre-al', label: 'TRE-AL — Alagoas' },
+      { value: 'tre-am', label: 'TRE-AM — Amazonas' },
+      { value: 'tre-ap', label: 'TRE-AP — Amapá' },
+      { value: 'tre-ba', label: 'TRE-BA — Bahia' },
+      { value: 'tre-ce', label: 'TRE-CE — Ceará' },
+      { value: 'tre-df', label: 'TRE-DF — Distrito Federal' },
+      { value: 'tre-es', label: 'TRE-ES — Espírito Santo' },
+      { value: 'tre-go', label: 'TRE-GO — Goiás' },
+      { value: 'tre-ma', label: 'TRE-MA — Maranhão' },
+      { value: 'tre-mg', label: 'TRE-MG — Minas Gerais' },
+      { value: 'tre-ms', label: 'TRE-MS — Mato Grosso do Sul' },
+      { value: 'tre-mt', label: 'TRE-MT — Mato Grosso' },
+      { value: 'tre-pa', label: 'TRE-PA — Pará' },
+      { value: 'tre-pb', label: 'TRE-PB — Paraíba' },
+      { value: 'tre-pe', label: 'TRE-PE — Pernambuco' },
+      { value: 'tre-pi', label: 'TRE-PI — Piauí' },
+      { value: 'tre-pr', label: 'TRE-PR — Paraná' },
+      { value: 'tre-rj', label: 'TRE-RJ — Rio de Janeiro' },
+      { value: 'tre-rn', label: 'TRE-RN — Rio Grande do Norte' },
+      { value: 'tre-ro', label: 'TRE-RO — Rondônia' },
+      { value: 'tre-rr', label: 'TRE-RR — Roraima' },
+      { value: 'tre-rs', label: 'TRE-RS — Rio Grande do Sul' },
+      { value: 'tre-sc', label: 'TRE-SC — Santa Catarina' },
+      { value: 'tre-se', label: 'TRE-SE — Sergipe' },
+      { value: 'tre-sp', label: 'TRE-SP — São Paulo' },
+      { value: 'tre-to', label: 'TRE-TO — Tocantins' },
+    ],
+  },
+  {
+    grupo: 'Justiça Estadual (TJ)',
+    itens: [
+      { value: 'tjsp', label: 'TJSP — São Paulo' },
+      { value: 'tjrj', label: 'TJRJ — Rio de Janeiro' },
+      { value: 'tjmg', label: 'TJMG — Minas Gerais' },
+      { value: 'tjrs', label: 'TJRS — Rio Grande do Sul' },
+      { value: 'tjpr', label: 'TJPR — Paraná' },
+      { value: 'tjsc', label: 'TJSC — Santa Catarina' },
+      { value: 'tjba', label: 'TJBA — Bahia' },
+      { value: 'tjgo', label: 'TJGO — Goiás' },
+      { value: 'tjpe', label: 'TJPE — Pernambuco' },
+      { value: 'tjce', label: 'TJCE — Ceará' },
+      { value: 'tjdf', label: 'TJDF — Distrito Federal' },
+      { value: 'tjmt', label: 'TJMT — Mato Grosso' },
+      { value: 'tjms', label: 'TJMS — Mato Grosso do Sul' },
+      { value: 'tjam', label: 'TJAM — Amazonas' },
+      { value: 'tjpa', label: 'TJPA — Pará' },
+      { value: 'tjes', label: 'TJES — Espírito Santo' },
+      { value: 'tjma', label: 'TJMA — Maranhão' },
+      { value: 'tjal', label: 'TJAL — Alagoas' },
+      { value: 'tjse', label: 'TJSE — Sergipe' },
+      { value: 'tjpi', label: 'TJPI — Piauí' },
+      { value: 'tjrn', label: 'TJRN — Rio Grande do Norte' },
+      { value: 'tjpb', label: 'TJPB — Paraíba' },
+      { value: 'tjro', label: 'TJRO — Rondônia' },
+      { value: 'tjac', label: 'TJAC — Acre' },
+      { value: 'tjap', label: 'TJAP — Amapá' },
+      { value: 'tjrr', label: 'TJRR — Roraima' },
+      { value: 'tjto', label: 'TJTO — Tocantins' },
+    ],
+  },
 ];
+
+// Lista flat para uso interno
+const TRIBUNAIS = GRUPOS_TRIBUNAIS.flatMap(g => g.itens);
 
 const POLO_LABEL = { a: 'Ativo', p: 'Passivo', t: 'Terceiro', s: 'Sem Informação' };
 const POLO_COLOR = { a: { bg: '#dbeafe', color: '#1e40af' }, p: { bg: '#fee2e2', color: '#991b1b' }, t: { bg: '#fef3c7', color: '#92400e' }, s: { bg: '#f1f5f9', color: '#475569' } };
@@ -385,8 +466,12 @@ const ConsultaDatajud = () => {
                   value={tribunal}
                   onChange={e => setTribunal(e.target.value)}
                 >
-                  {TRIBUNAIS.map(t => (
-                    <option key={t.value} value={t.value}>{t.label}</option>
+                  {GRUPOS_TRIBUNAIS.map(g => (
+                    <optgroup key={g.grupo} label={g.grupo}>
+                      {g.itens.map(t => (
+                        <option key={t.value} value={t.value}>{t.label}</option>
+                      ))}
+                    </optgroup>
                   ))}
                 </select>
               </div>
